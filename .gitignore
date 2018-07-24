@@ -35,3 +35,6 @@ sysinfo.txt
 *.unitypackage
 
 !Assets/Meshes/Coin/coin.obj
+
+tmp/*  
+!.gitkeep
