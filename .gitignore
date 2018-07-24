@@ -36,5 +36,5 @@ sysinfo.txt
 
 !Assets/Meshes/Coin/coin.obj
 
-Assets/*  
-!.gitkeep
+*
+!.gitignore
