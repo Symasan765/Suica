@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallMove_Basic : MonoBehaviour {
-
-    [Tooltip("球速(km/h)")]
-    public float Speed = 100.0f;
+public class BallMove_Basic : Ball_Pure {
 
 	// Use this for initialization
 	void Start () {

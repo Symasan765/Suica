@@ -10,6 +10,10 @@ public class BallShooter : MonoBehaviour {
     public float RayLength = 18.44f;
     [Tooltip("レイ可視化用オブジェクト(円柱)")]
     public GameObject RayMesh;
+    [Tooltip("ミットオブジェクト")]
+    public GameObject GloveObject;
+    [Tooltip("球速(k/h)")]
+    public float ShotSpeed = 100.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -18,8 +22,10 @@ public class BallShooter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        LookAtGlove();
         ShotBall();
-        AimRay();
+        RayView(Vector3.Distance(this.transform.position, GloveObject.transform.position));
+
     }
 
     // 射出方向へのレイ
@@ -30,7 +36,6 @@ public class BallShooter : MonoBehaviour {
         if(Physics.SphereCast(ray, BallList[0].transform.localScale.x, out hit, 20.0f))
         {
             RayView(hit.distance);
-
         }
     }
 
@@ -42,6 +47,7 @@ public class BallShooter : MonoBehaviour {
             GameObject go = Instantiate(BallList[0]);
             go.transform.position = this.transform.position;
             go.transform.rotation = this.transform.rotation;
+            go.GetComponent<Ball_Pure>().Speed = ShotSpeed;     //球速のセット
         }
     }
 
@@ -52,5 +58,11 @@ public class BallShooter : MonoBehaviour {
         RayMesh.transform.localPosition = new Vector3(0, 0, dist / 2.0f);
         // length
         RayMesh.transform.localScale = new Vector3(0.1f, dist / 2.0f, 0.1f);
+    }
+
+    // ミットへ向く
+    void LookAtGlove()
+    {
+        this.transform.LookAt(GloveObject.transform);
     }
 }
