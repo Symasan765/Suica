@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball_Pure : MonoBehaviour {
+public class Glove : MonoBehaviour {
 
-    [Tooltip("球速(k/h)")]
-    public float Speed;
+    [Tooltip("捕手位置")]
+    public GameObject CatchPoint;
+
 
 	// Use this for initialization
 	void Start () {

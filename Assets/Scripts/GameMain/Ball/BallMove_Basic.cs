@@ -11,12 +11,21 @@ public class BallMove_Basic : Ball_Pure {
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.position = this.transform.position + (this.transform.forward * BallSpeed());
+        if (Status == EBallStatus.Throw)
+        {
+            Throw_Straight();
+        }
 	}
 
     // km/h -> m/s
     float BallSpeed()
     {
         return Time.deltaTime * Speed * 0.28f;
+    }
+
+    // ボール送球時挙動_ストレート
+    void Throw_Straight()
+    {
+        this.transform.position = this.transform.position + (this.transform.forward * BallSpeed());
     }
 }

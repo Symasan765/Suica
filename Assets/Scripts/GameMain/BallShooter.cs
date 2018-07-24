@@ -14,9 +14,11 @@ public class BallShooter : MonoBehaviour {
     public GameObject GloveObject;
     [Tooltip("球速(k/h)")]
     public float ShotSpeed = 100.0f;
+    [Tooltip("管理しているボール")]
+    private GameObject ManageBall;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -44,10 +46,15 @@ public class BallShooter : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject go = Instantiate(BallList[0]);
-            go.transform.position = this.transform.position;
-            go.transform.rotation = this.transform.rotation;
-            go.GetComponent<Ball_Pure>().Speed = ShotSpeed;     //球速のセット
+            if (ManageBall)
+            {
+                DestroyObject(ManageBall);
+            }
+
+            ManageBall = Instantiate(BallList[0]);
+            ManageBall.transform.position = this.transform.position;
+            ManageBall.transform.rotation = this.transform.rotation;
+            ManageBall.GetComponent<Ball_Pure>().Speed = ShotSpeed;     //球速のセット
         }
     }
 
