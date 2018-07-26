@@ -16,6 +16,8 @@ public class BallShooter : MonoBehaviour {
     public float ShotSpeed = 100.0f;
     [Tooltip("管理しているボール")]
     private GameObject ManageBall;
+    [Tooltip("リリースポイントターゲット")]
+    public Transform ReleasePoint;
 
     // Use this for initialization
     void Start () {
@@ -24,8 +26,9 @@ public class BallShooter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        ReleasePointUpdate();
         LookAtGlove();
-        ShotBall();
+        ShotBallByKey();
         RayView(Vector3.Distance(this.transform.position, GloveObject.transform.position));
 
     }
@@ -42,20 +45,26 @@ public class BallShooter : MonoBehaviour {
     }
 
     // ボールの射出
-    void ShotBall()
+    void ShotBallByKey()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (ManageBall)
-            {
-                DestroyObject(ManageBall);
-            }
-
-            ManageBall = Instantiate(BallList[0]);
-            ManageBall.transform.position = this.transform.position;
-            ManageBall.transform.rotation = this.transform.rotation;
-            ManageBall.GetComponent<Ball_Pure>().Speed = ShotSpeed;     //球速のセット
+            ShotBall(0);
         }
+    }
+
+    // 指定要素番号のボールを射出
+    public void ShotBall(int type)
+    {
+        if (ManageBall)
+        {
+            DestroyObject(ManageBall);
+        }
+        ManageBall = Instantiate(BallList[type]);
+        ManageBall.transform.position = this.transform.position;
+        ManageBall.transform.rotation = this.transform.rotation;
+        ManageBall.GetComponent<Ball_Pure>().Speed = ShotSpeed;     //球速のセット
+
     }
 
     // レイ可視化メッシュの変形
@@ -71,5 +80,12 @@ public class BallShooter : MonoBehaviour {
     void LookAtGlove()
     {
         this.transform.LookAt(GloveObject.transform);
+    }
+
+    // リリースポイントの更新
+    void ReleasePointUpdate()
+    {
+        if(ReleasePoint)
+            this.transform.position = ReleasePoint.position;
     }
 }
