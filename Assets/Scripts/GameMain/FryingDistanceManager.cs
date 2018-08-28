@@ -43,6 +43,10 @@ public class FryingDistanceManager : MonoBehaviour {
         DistanceText.text = FryingDistance.ToString("0.00");        // 小数点以下２桁
 
         isCalc = false;
+
+        // 飛距離計算オブジェクトセット
+        BasePoint = transform;
+        MeasureObj = gameObject;
     }
 
     // 距離計算
