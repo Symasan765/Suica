@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FryingDistanceManager : MonoBehaviour {
 
     [Tooltip("これをベースに距離を測定")]
-    public Transform BasePoint;
+    public Vector3 BasePoint;
     [Tooltip("ベースとの距離を測るオブジェクト")]
     public GameObject MeasureObj;
     [Tooltip("飛距離")]
@@ -44,15 +44,15 @@ public class FryingDistanceManager : MonoBehaviour {
 
         isCalc = false;
 
-        // 飛距離計算オブジェクトセット
-        BasePoint = transform;
-        MeasureObj = gameObject;
+        // 飛距離計算オブジェクト初期化
+        BasePoint = new Vector3(0, 0, 0);
+        MeasureObj = GameObject.FindWithTag("Ball");
     }
 
     // 距離計算
     private float CalcDistance()
     {
-        Distance = Vector3.Distance(new Vector3(BasePoint.position.x, BasePoint.position.y, BasePoint.position.z), new Vector3(MeasureObj.transform.position.x, MeasureObj.transform.position.y, MeasureObj.transform.position.z));
+        Distance = Vector3.Distance(new Vector3(BasePoint.x, BasePoint.y, BasePoint.z), new Vector3(MeasureObj.transform.position.x, MeasureObj.transform.position.y, MeasureObj.transform.position.z));
 
         if(MeasureObj.transform.position.z < 0)
         {
