@@ -13,6 +13,8 @@ public class FryingDistanceManager : MonoBehaviour {
     public float FryingDistance;
     [Tooltip("飛距離を表示するテキスト")]
     public Text DistanceText;
+    //[Tooltip("テキストの色")]
+    //public Color TextColor;
     [Tooltip("True:測定開始 False:測定終了")]
     public bool isCalc;
 
@@ -40,13 +42,14 @@ public class FryingDistanceManager : MonoBehaviour {
     private void Init()
     {
         FryingDistance = 0.0f;
+        //DistanceText.color = TextColor;
         DistanceText.text = FryingDistance.ToString("0.00");        // 小数点以下２桁
 
         isCalc = false;
 
         // 飛距離計算オブジェクト初期化
         BasePoint = new Vector3(0, 0, 0);
-        MeasureObj = GameObject.FindWithTag("Ball");
+        //MeasureObj = GameObject.FindWithTag("Ball");
     }
 
     // 距離計算
@@ -63,4 +66,17 @@ public class FryingDistanceManager : MonoBehaviour {
         
     }
 
+    public void SetIsCalc(bool flg)
+    {
+        isCalc = flg;
+
+        if (isCalc)
+        {
+            MeasureObj = GameObject.FindWithTag("Ball");
+        }
+        else
+        {
+            MeasureObj = null;
+        }
+    }
 }
