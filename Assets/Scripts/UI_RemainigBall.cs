@@ -31,12 +31,14 @@ public class UI_RemainigBall : MonoBehaviour {
         {
             Debug.Log("Prefabがセットされていません。");
         }
+
+        m_ballSetting.onSet += AllRemove;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         int currentNum = m_ballSetting.GetCurrentNum();
-
+        
         if (m_oldBallNum != currentNum)
         {
 
@@ -88,6 +90,17 @@ public class UI_RemainigBall : MonoBehaviour {
         if(m_oldBallNum != _currentNum)
         {
             Add(_currentNum);
+        }
+    }
+
+    
+    private void AllRemove()
+    {
+        // 減らす
+        for (int i = m_oldBallNum; i > 0; i--)
+        {
+            Destroy(gameObject.transform.GetChild(m_oldBallNum - 1).gameObject);
+            m_oldBallNum--;
         }
     }
 }

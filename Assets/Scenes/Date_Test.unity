@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_splitNum: 5
-  m_firstPos: {x: 0, y: 0, z: 0}
+  m_firstPos: {x: -8, y: 5, z: 0}
   m_interval: {x: 2, y: 2, z: 0}
   m_ballSetting: {fileID: 1666467152}
   m_prefab: {fileID: 1818961526107702, guid: 80d045bd4c4df4d42954feb4a7dbd4bc, type: 2}

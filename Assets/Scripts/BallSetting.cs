@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BallSetting : MonoBehaviour {
 
@@ -9,6 +10,13 @@ public class BallSetting : MonoBehaviour {
     // 現在の球数
     [SerializeField]
     private int currentNum;
+    private bool setFlg = false;
+    public bool SetFlag
+    {
+        set { setFlg = value; }
+        get { return setFlg; }
+    }
+    public event Action onSet = null;
 
     /// <summary>
     /// 球数を設定
@@ -18,6 +26,11 @@ public class BallSetting : MonoBehaviour {
     {
         maxNum = _max;
         currentNum = _max;
+        SetFlag = true;
+        if(onSet != null)
+        {
+            onSet();
+        }
     }
 
     /// <summary>
