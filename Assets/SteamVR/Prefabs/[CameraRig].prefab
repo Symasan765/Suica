@@ -546,10 +546,9 @@ GameObject:
   - component: {fileID: 4212782180180866}
   - component: {fileID: 33001190758932974}
   - component: {fileID: 23274290841159956}
-  - component: {fileID: 64487943211677312}
   m_Layer: 0
   m_Name: Mob_BaseBall_Bat_LOD_2
-  m_TagString: Untagged
+  m_TagString: Badboy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -563,9 +562,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4837893881901048}
   - component: {fileID: 205846492112790804}
+  - component: {fileID: 136612334633780328}
+  - component: {fileID: 54857989959518950}
   m_Layer: 0
   m_Name: Mob_Baseball_Bat_01
-  m_TagString: Untagged
+  m_TagString: Badboy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -580,10 +581,9 @@ GameObject:
   - component: {fileID: 4459702509834416}
   - component: {fileID: 33265074839239688}
   - component: {fileID: 23240947318136020}
-  - component: {fileID: 64479311021875058}
   m_Layer: 0
   m_Name: Mob_BaseBall_Bat_LOD_0
-  m_TagString: Untagged
+  m_TagString: Badboy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -598,10 +598,9 @@ GameObject:
   - component: {fileID: 4714643583541266}
   - component: {fileID: 33577102306403590}
   - component: {fileID: 23316466894818560}
-  - component: {fileID: 64270044793788636}
   m_Layer: 0
   m_Name: Mob_BaseBall_Bat_LOD_1
-  m_TagString: Untagged
+  m_TagString: Badboy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -814,48 +813,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64270044793788636
-MeshCollider:
+--- !u!54 &54857989959518950
+Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1769743504932272}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300002, guid: 1635ebc29fd2c874e9d6a39015dec246, type: 3}
---- !u!64 &64479311021875058
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1171085888105492}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300002, guid: 84aa072381d856f46b8a5f3fc7494400, type: 3}
---- !u!64 &64487943211677312
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1053589199811488}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: b7fddc03c3f761046a59aee648c0a454, type: 3}
+  m_GameObject: {fileID: 1092080760398144}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65621622164874750
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1086,6 +1058,19 @@ MonoBehaviour:
     type: 2}
   teleportReticlePrefab: {fileID: 1639319533735882, guid: cfb27f702a3af894b918c1816366ee19,
     type: 2}
+--- !u!136 &136612334633780328
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1092080760398144}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.07
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0.000000026340581, y: 0.6, z: -0.0026055365}
 --- !u!205 &205846492112790804
 LODGroup:
   m_ObjectHideFlags: 1

@@ -15,7 +15,7 @@ public class Ball_Pure : MonoBehaviour {
     [Tooltip("球速(k/h)")]
     public float Speed;
     [Tooltip("ボールの状態")]
-    protected EBallStatus Status = EBallStatus.Throw;
+    public EBallStatus Status = EBallStatus.Throw;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +44,19 @@ public class Ball_Pure : MonoBehaviour {
             {
                 Status = EBallStatus.Catch;
                 SetBallInGlove(other.GetComponent<Glove>().CatchPoint.transform.position);
+            }
+        }
+
+        if(other.transform.CompareTag("Badboy"))
+        {
+            if(Status == EBallStatus.Throw)
+            {
+                Status = EBallStatus.Flying;
+                this.GetComponent<Rigidbody>().useGravity = true;
+
+                var vel = other.GetComponent<Rigidbody>().velocity;
+                this.GetComponent<Rigidbody>().AddForce(vel, ForceMode.Force);
+
             }
         }
     }
