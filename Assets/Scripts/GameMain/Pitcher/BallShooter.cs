@@ -64,7 +64,7 @@ public class BallShooter : MonoBehaviour {
         ManageBall.transform.position = this.transform.position;
         ManageBall.transform.rotation = this.transform.rotation;
         ManageBall.GetComponent<Ball_Pure>().Speed = ShotSpeed;     //球速のセット
-
+        GloveObject.GetComponent<Glove>().SetBallTracing(ManageBall);
     }
 
     // レイ可視化メッシュの変形

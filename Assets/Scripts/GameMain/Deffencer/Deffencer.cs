@@ -19,7 +19,7 @@ public class Deffencer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         LookAtBall();
-        ModeRun();
+        // ModeRun();
 	}
 
     void LookAtBall()

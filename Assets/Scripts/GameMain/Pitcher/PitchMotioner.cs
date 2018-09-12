@@ -28,18 +28,20 @@ public class PitchMotioner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.F))
+
+
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            State = EPitchState.Throw;
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                State = EPitchState.Throw;
+            }
         }
-
-
-
 
 
         if (State == EPitchState.Idle)
         {
-
         }
         else if(State == EPitchState.Throw)
         {
