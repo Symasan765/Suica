@@ -17,6 +17,8 @@ public class Ball_Pure : MonoBehaviour {
     //
     [Tooltip("球速(k/h)")]
     public float Speed;
+    [Tooltip("サウンド")]
+    public AudioSource audio;
 
     //
     [Tooltip("ボールの状態")]
@@ -33,6 +35,7 @@ public class Ball_Pure : MonoBehaviour {
     // Update is called once per frame
     protected virtual void Update () {
         BallSetup();
+        AudioVolumeControll();
 	}
 
     private void SetBallInGlove(Vector3 newPos)
@@ -53,6 +56,7 @@ public class Ball_Pure : MonoBehaviour {
     // km/h -> m/s
     protected float CalcBallSpeed()
     {
+        // return Speed * 0.28f;
         return Speed / 3.6f;
     }
 
@@ -80,8 +84,19 @@ public class Ball_Pure : MonoBehaviour {
 
                 var vel = other.GetComponent<Rigidbody>().velocity;
                 this.GetComponent<Rigidbody>().AddForce(vel, ForceMode.Force);
-
+                
             }
         }
+    }
+
+    public EBallStatus GetBallState()
+    {
+        return Status;
+    }
+
+    private void AudioVolumeControll()
+    {
+
+        audio.volume = Mathf.Clamp01(this.RigidbodyComponent.velocity.magnitude / 100.0f);
     }
 }

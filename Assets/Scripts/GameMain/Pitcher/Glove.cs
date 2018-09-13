@@ -9,7 +9,9 @@ public class Glove : MonoBehaviour {
     {
         Aim = 0,    //　狙い
         Trace,      //　捕球
-        Catch,     //  とった
+        Catch,      //  とった
+        Wait,       // 打ったときとか
+        Setup,      // 初期化てきな
         MODE_MAX
     }
 
@@ -18,22 +20,33 @@ public class Glove : MonoBehaviour {
     public GameObject CatchPoint;
     [Tooltip("捕球後の硬直時間")]
     public float StopTimeInCatch = 1.0f;
+    [Tooltip("")]
+    public AudioSource source;
+    [Tooltip("Sound")]
+    public AudioClip clip;
+
 
     //
     private GameObject BallObject;
-    public EMitMode State = EMitMode.Aim;
+    public EMitMode State = EMitMode.Setup;
     private float StackTime = 0;
     private float MoveWeight = 0.2f;
-
+    private Vector3 InitMitPosition = Vector3.zero;
 
 
 	// Use this for initialization
 	void Start () {
-		
+        InitMitPosition = this.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            State = EMitMode.Setup;
+        }
+        MitWait();
+        MitSetup();
         MitAiming();
         MitTrace();
         MitCatch();
@@ -82,10 +95,39 @@ public class Glove : MonoBehaviour {
 
         if(StackTime == StopTimeInCatch)
         {
-            DestroyObject(BallObject);
-            State = EMitMode.Aim;
+            State = EMitMode.Setup;
         }
 
+    }
+
+    void MitWait()
+    {
+        if (BallObject)
+        {
+            if(BallObject.GetComponent<Ball_Pure>().GetBallState() == Ball_Pure.EBallStatus.Flying)
+            {
+                State = EMitMode.Wait;
+            }
+        }
+
+        if (State != EMitMode.Wait) return;
+
+        StackTime = Mathf.Min(StopTimeInCatch, StackTime + Time.deltaTime);
+
+        if (StackTime == StopTimeInCatch)
+        {
+            State = EMitMode.Setup;
+        }
+    }
+
+    void MitSetup()
+    {
+        if (State != EMitMode.Setup) return;
+
+        DestroyObject(BallObject);
+        this.transform.position = InitMitPosition;
+
+        State = EMitMode.Aim;
     }
 
     public void SetBallTracing(GameObject ball_)
@@ -96,6 +138,8 @@ public class Glove : MonoBehaviour {
 
     public void SetStateCatch()
     {
+        source.PlayOneShot(clip);
         State = EMitMode.Catch;
     }
+
 }
