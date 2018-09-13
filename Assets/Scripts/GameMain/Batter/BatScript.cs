@@ -15,7 +15,9 @@ public class BatScript : MonoBehaviour {
 	GameObject m_End;
 
 	public GameObject cube;
-	public float m_BatMass;	// 現在のバットの質量
+	public float m_BatMass; // 現在のバットの質量
+	
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +30,8 @@ public class BatScript : MonoBehaviour {
 		m_EndNowPos = m_End.transform.position;
 		m_TipOldPos = m_TipNowPos;
 		m_EndOldPos = m_EndNowPos;
+
+		audioSource = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -78,6 +82,9 @@ public class BatScript : MonoBehaviour {
 			ridid.position = HitPoint;
 			ridid.AddForce(SwingVec * SwingSpeedVec.magnitude,ForceMode.Impulse);
 			Debug.Log("スイングスピード : " + SwingSpeedVec.magnitude + "kg・m/s");
+
+			// バットの音を鳴らす
+			audioSource.Play();
 		}
 	}
 }
