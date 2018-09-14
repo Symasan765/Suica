@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatScript : MonoBehaviour {
+public class BatScript : MonoBehaviour
+{
 	// バットの先端位置
 	Vector3 m_TipNowPos;
 	Vector3 m_TipOldPos;
@@ -16,11 +17,12 @@ public class BatScript : MonoBehaviour {
 
 	public GameObject cube;
 	public float m_BatMass; // 現在のバットの質量
-	
+
 	private AudioSource audioSource;
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		// バットの先端を取得する
 		m_Tip = gameObject.transform.Find("BatTip").gameObject;
 		m_End = gameObject.transform.Find("BatEnd").gameObject;
@@ -33,9 +35,10 @@ public class BatScript : MonoBehaviour {
 
 		audioSource = gameObject.GetComponent<AudioSource>();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		m_TipOldPos = m_TipNowPos;
 		m_EndOldPos = m_EndNowPos;
 
@@ -78,9 +81,26 @@ public class BatScript : MonoBehaviour {
 
 			// 球を飛ばす
 			var ridid = collider.gameObject.GetComponent<Rigidbody>();
+			Vector3 BallVect = ridid.velocity.normalized;
+			Vector3 RayCastPos = HitPoint - (BallVect * 2.0f);
+
+			// レイを飛ばして法線ベクトルを求め反射ベクトルを求める
+			RaycastHit hit;
+			if (Physics.Raycast(RayCastPos, BallVect, out hit, 3.0f))
+			{
+				if (hit.collider.gameObject.tag == "Badboy")
+				{
+					Vector3 normal = hit.normal.normalized;
+					float a = Vector3.Dot(BallVect, normal);
+					BallVect = BallVect + 2 * a * normal;
+					SwingVec += BallVect;
+					SwingVec = -SwingVec.normalized;
+				}
+			}
+
 			ridid.velocity = Vector3.zero;
 			ridid.position = HitPoint;
-			ridid.AddForce(SwingVec * SwingSpeedVec.magnitude,ForceMode.Impulse);
+			ridid.AddForce(SwingVec * SwingSpeedVec.magnitude, ForceMode.Impulse);
 			Debug.Log("スイングスピード : " + SwingSpeedVec.magnitude + "kg・m/s");
 
 			// バットの音を鳴らす
