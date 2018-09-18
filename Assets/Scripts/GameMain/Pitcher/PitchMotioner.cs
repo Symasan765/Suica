@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PitchMotioner : MonoBehaviour {
 
+    private SteamVR_TrackedObject trackedObject;
+    public SteamVR_TrackedObject MainControllerObj;
+
     public enum EPitchState
     {
         Idle,
@@ -18,11 +21,19 @@ public class PitchMotioner : MonoBehaviour {
 
     public BallShooter shooter;
     public float ShotTimeOffset = 0;
+
+
+    private AudioSource audioSource;
+    public AudioClip clip;
     
+    void Awake()
+    {
+        trackedObject = MainControllerObj;
+    }
 
 	// Use this for initialization
 	void Start () {
-
+        audioSource = this.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -33,10 +44,23 @@ public class PitchMotioner : MonoBehaviour {
 
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (trackedObject)
             {
-                State = EPitchState.Throw;
+                if (Input.GetKeyDown(KeyCode.F) || Controller.GetPress(SteamVR_Controller.ButtonMask.Trigger))
+                {
+                    State = EPitchState.Throw;
+                    audioSource.PlayOneShot(clip);
+                }
             }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    State = EPitchState.Throw;
+                    audioSource.PlayOneShot(clip);
+                }
+            }
+
         }
 
 
@@ -58,6 +82,11 @@ public class PitchMotioner : MonoBehaviour {
 
         }
 	}
+
+    private SteamVR_Controller.Device Controller
+    {
+        get { return SteamVR_Controller.Input((int)trackedObject.index); }
+    }
 
 
 }

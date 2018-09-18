@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallMove_Basic : Ball_Pure {
 
     [Tooltip("ボールの伸び")]
-    public float BallFloater = 1.0f;
+    public float BallFloater = 9.0f;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -15,10 +15,6 @@ public class BallMove_Basic : Ball_Pure {
 	// Update is called once per frame
 	protected override void Update () {
         base.Update();
-        if (Status == EBallStatus.Throw)
-        {
-            Throw_Straight();
-        }
 	}
 
     // km/h -> m/s
@@ -28,7 +24,7 @@ public class BallMove_Basic : Ball_Pure {
     }
 
     // ボール送球時挙動_ストレート
-    void Throw_Straight()
+    protected override void Throwing()
     {
         this.RigidbodyComponent.AddForce(new Vector3(0, 1, 0) * BallFloater, ForceMode.Acceleration);
     }

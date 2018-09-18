@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball_Pure : MonoBehaviour {
+public class Ball_Pure : MonoBehaviour
+{
 
     //
     public enum EBallStatus
@@ -18,29 +19,37 @@ public class Ball_Pure : MonoBehaviour {
     [Tooltip("球速(k/h)")]
     public float Speed;
     [Tooltip("サウンド")]
-    public AudioSource audio;
+    public AudioSource audioSource;
 
     //
     [Tooltip("ボールの状態")]
     protected EBallStatus Status = EBallStatus.Init;
     [Tooltip("自身のRigidbodyコンポーネント")]
     protected Rigidbody RigidbodyComponent;
+    [Tooltip("ホームベーカリーとピッチマウンドとの距離")]
+    protected const float ToBaseDistance = 18.44f;
 
 
-	// Use this for initialization
-	protected virtual void Start () {
+    // Use this for initialization
+    protected virtual void Start()
+    {
         RigidbodyComponent = this.GetComponent<Rigidbody>();
-	}
+    }
 
     // Update is called once per frame
-    protected virtual void Update () {
+    protected virtual void Update()
+    {
         BallSetup();
         AudioVolumeControll();
-	}
+        if (Status == EBallStatus.Throw)
+        {
+            Throwing();
+        }
+    }
 
     private void SetBallInGlove(Vector3 newPos)
     {
-        if(Status == EBallStatus.Catch)
+        if (Status == EBallStatus.Catch)
         {
             this.transform.position = newPos;
         }
@@ -62,10 +71,10 @@ public class Ball_Pure : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-                // 捕球状態
+        // 捕球状態
         if (other.transform.CompareTag("Glove"))
         {
-            if(Status == EBallStatus.Throw)
+            if (Status == EBallStatus.Throw)
             {
                 Status = EBallStatus.Catch;
                 SetBallInGlove(other.GetComponent<Glove>().CatchPoint.transform.position);
@@ -75,16 +84,16 @@ public class Ball_Pure : MonoBehaviour {
             }
         }
 
-        if(other.transform.CompareTag("Badboy"))
+        if (other.transform.CompareTag("Badboy"))
         {
-            if(Status == EBallStatus.Throw)
+            if (Status == EBallStatus.Throw)
             {
                 Status = EBallStatus.Flying;
                 this.GetComponent<Rigidbody>().useGravity = true;
 
                 var vel = other.GetComponent<Rigidbody>().velocity;
                 this.GetComponent<Rigidbody>().AddForce(vel, ForceMode.Force);
-                
+
             }
         }
     }
@@ -97,6 +106,13 @@ public class Ball_Pure : MonoBehaviour {
     private void AudioVolumeControll()
     {
 
-        audio.volume = Mathf.Clamp01(this.RigidbodyComponent.velocity.magnitude / 100.0f);
+        audioSource.volume = Mathf.Clamp01(this.RigidbodyComponent.velocity.magnitude / 100.0f);
+    }
+
+    // 送球状態にある球の制御
+    protected virtual void Throwing()
+    {
+
+
     }
 }

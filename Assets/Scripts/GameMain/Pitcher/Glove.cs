@@ -24,13 +24,14 @@ public class Glove : MonoBehaviour {
     public AudioSource source;
     [Tooltip("Sound")]
     public AudioClip clip;
+    [Tooltip("ミットの移動量")]
+    public float MoveWeight = 0.05f;
 
 
     //
     private GameObject BallObject;
     public EMitMode State = EMitMode.Setup;
     private float StackTime = 0;
-    private float MoveWeight = 0.2f;
     private Vector3 InitMitPosition = Vector3.zero;
 
 
