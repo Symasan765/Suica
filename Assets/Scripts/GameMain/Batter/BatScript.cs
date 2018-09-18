@@ -14,8 +14,7 @@ public class BatScript : MonoBehaviour
 
 	GameObject m_Tip;
 	GameObject m_End;
-
-	public GameObject cube;
+	
 	public float m_BatMass; // 現在のバットの質量
 
 	private AudioSource audioSource;
@@ -51,9 +50,10 @@ public class BatScript : MonoBehaviour
 		// 3D同士が接触した瞬間の１回のみ呼び出される処理
 		if (collider.gameObject.tag == "Ball")
 		{
-			cube.transform.position = collider.ClosestPointOnBounds(this.transform.position);
-			cube.transform.position = new Vector3(cube.transform.position.x, cube.transform.position.y, transform.position.z);
-			Vector3 HitPoint = cube.transform.position;
+			Vector3 cube;
+			cube = collider.ClosestPointOnBounds(this.transform.position);
+			cube = new Vector3(cube.x, cube.y, transform.position.z);
+			Vector3 HitPoint = cube;
 
 			// 当たった位置のバットでの割合を求める
 			float sizeX = m_TipNowPos.x - m_EndNowPos.x;
@@ -82,11 +82,11 @@ public class BatScript : MonoBehaviour
 			// 球を飛ばす
 			var ridid = collider.gameObject.GetComponent<Rigidbody>();
 			Vector3 BallVect = ridid.velocity.normalized;
-			Vector3 RayCastPos = HitPoint - (BallVect * 2.0f);
+			Vector3 RayCastPos = HitPoint - (BallVect * 5.0f);
 
 			// レイを飛ばして法線ベクトルを求め反射ベクトルを求める
 			RaycastHit hit;
-			if (Physics.Raycast(RayCastPos, BallVect, out hit, 3.0f))
+			if (Physics.Raycast(RayCastPos, BallVect, out hit, 15.0f))
 			{
 				if (hit.collider.gameObject.tag == "Badboy")
 				{
