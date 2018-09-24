@@ -100,6 +100,7 @@ public class BatScript : MonoBehaviour
 
 			ridid.velocity = Vector3.zero;
 			ridid.position = HitPoint;
+			SwingVec = new Vector3(SwingVec.x, 0.2f, SwingVec.z).normalized;
 			ridid.AddForce(SwingVec * SwingSpeedVec.magnitude, ForceMode.Impulse);
 			Debug.Log("スイングスピード : " + SwingSpeedVec.magnitude + "kg・m/s");
 
