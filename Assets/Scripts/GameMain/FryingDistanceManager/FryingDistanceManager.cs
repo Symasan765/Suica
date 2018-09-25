@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FryingDistanceManager : MonoBehaviour {
+public class FryingDistanceManager : MonoBehaviour
+{
 
     [Tooltip("これをベースに距離を測定")]
     public Vector3 BasePoint;
@@ -22,16 +23,20 @@ public class FryingDistanceManager : MonoBehaviour {
 
     private float Distance;     // 飛距離計算用
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         // 初期化
         Init();
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        CheckBallStatus();
 
         if (isCalc)
         {
@@ -46,7 +51,7 @@ public class FryingDistanceManager : MonoBehaviour {
                 DistanceText.text = FryingDistance.ToString("0.00");        // 小数点以下２桁
             }
         }
-	}
+    }
 
     private void Init()
     {
@@ -67,13 +72,13 @@ public class FryingDistanceManager : MonoBehaviour {
     {
         Distance = Vector3.Distance(new Vector3(BasePoint.x, BasePoint.y, BasePoint.z), new Vector3(MeasureObj.transform.position.x, MeasureObj.transform.position.y, MeasureObj.transform.position.z));
 
-        if(MeasureObj.transform.position.z < 0)
+        if (MeasureObj.transform.position.z < 0)
         {
             Distance = -Distance;
         }
 
         return Distance;
-        
+
     }
 
     // 距離計算 y軸無し
@@ -89,6 +94,32 @@ public class FryingDistanceManager : MonoBehaviour {
         return Distance;
 
     }
+
+    private void CheckBallStatus()
+    {
+        if (MeasureObj == null)
+        {
+            MeasureObj = GameObject.FindWithTag("Ball");
+        }
+        else
+        {
+            Debug.Log("ボール取得");
+            if (MeasureObj.GetComponent<Ball_Pure>().GetBallState() == Ball_Pure.EBallStatus.Flying)
+            {
+                isCalc = true;
+            }
+            else
+            {
+                isCalc = false;
+            }
+        }
+
+        if (isCalc && MeasureObj.transform.position.y < 0)
+        {
+            isCalc = false;
+        }
+    }
+
 
     // 計算開始フラグセット
     public void SetIsCalc(bool flg)
