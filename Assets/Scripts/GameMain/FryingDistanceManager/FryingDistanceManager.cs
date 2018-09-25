@@ -103,7 +103,6 @@ public class FryingDistanceManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ボール取得");
             if (MeasureObj.GetComponent<Ball_Pure>().GetBallState() == Ball_Pure.EBallStatus.Flying)
             {
                 isCalc = true;
