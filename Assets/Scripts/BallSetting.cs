@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class BallSetting : MonoBehaviour {
 
     // 球の最大数
@@ -17,6 +18,23 @@ public class BallSetting : MonoBehaviour {
         get { return setFlg; }
     }
     public event Action onSet = null;
+
+    public Canvas canvas;
+    public GameObject message;
+    public Text text;
+
+    private void Update()
+    {
+        
+        if(text != null)
+        {
+            text.text = currentNum.ToString();
+            if (currentNum < 0)
+            {
+                text.text = "";
+            }
+        }
+    }
 
     /// <summary>
     /// 球数を設定
@@ -57,13 +75,12 @@ public class BallSetting : MonoBehaviour {
     /// <returns>球が０より下になるとFalseが返る</returns>
     public bool Sub(int _num = 1)
     {
-        if (currentNum - _num < 0)
+        currentNum -= _num;
+        if (currentNum < 0)
         {
             return false;
         }
-
-        currentNum -= _num;
-
+        
         return true;
     }
 
@@ -82,5 +99,23 @@ public class BallSetting : MonoBehaviour {
     public int GetCurrentNum()
     {
         return currentNum;
+    }
+
+    public bool IsPitching(int _num = 1)
+    {
+        if (currentNum < 0) return false ;
+        if (!Sub(_num))
+        {
+            StartCoroutine("enumerator");
+            return false;
+        }
+        return true;
+    }
+
+    IEnumerator enumerator()
+    {
+        Instantiate(message, canvas.transform);
+        yield return new WaitForSeconds(3.0f);
+        SceneManager.LoadScene("Title");
     }
 }

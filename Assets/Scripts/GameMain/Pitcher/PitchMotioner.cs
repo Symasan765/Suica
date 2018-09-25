@@ -25,6 +25,8 @@ public class PitchMotioner : MonoBehaviour {
 
     private AudioSource audioSource;
     public AudioClip clip;
+
+    public BallSetting ballSetting;
     
     void Awake()
     {
@@ -34,12 +36,11 @@ public class PitchMotioner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         audioSource = this.GetComponent<AudioSource>();
-	}
+        //ballSetting.Set(2);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
-
 
 
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -48,16 +49,22 @@ public class PitchMotioner : MonoBehaviour {
             {
                 if (Input.GetKeyDown(KeyCode.F) || Controller.GetPress(SteamVR_Controller.ButtonMask.Trigger))
                 {
-                    State = EPitchState.Throw;
-                    audioSource.PlayOneShot(clip);
+                    if (ballSetting.IsPitching())
+                    {
+                        State = EPitchState.Throw;
+                        audioSource.PlayOneShot(clip);
+                    }
                 }
             }
             else
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    State = EPitchState.Throw;
-                    audioSource.PlayOneShot(clip);
+                    if (ballSetting.IsPitching())
+                    {
+                        State = EPitchState.Throw;
+                        audioSource.PlayOneShot(clip);
+                    }
                 }
             }
 
