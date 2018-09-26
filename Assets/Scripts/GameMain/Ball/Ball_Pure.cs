@@ -20,6 +20,8 @@ public class Ball_Pure : MonoBehaviour
     public float Speed;
     [Tooltip("サウンド")]
     public AudioSource audioSource;
+    [Tooltip("球種名")]
+    public string BallTypeName = "";
 
     //
     [Tooltip("ボールの状態")]

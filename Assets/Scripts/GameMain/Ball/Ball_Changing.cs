@@ -34,7 +34,8 @@ public class Ball_Changing : Ball_Pure
     {
         base.Throwing();
         float Dist = Mathf.Max(0, ToBaseDistance - this.transform.position.z);
-        float fPower = MaxForce * EffectiveTiming.Evaluate(Dist);
+        Dist = Dist / ToBaseDistance;
+        float fPower = MaxForce * EffectiveTiming.Evaluate(Dist) * (Speed / 100.0f);
         Vector3 vPower = Trans.up* fPower;
         RigidbodyComponent.AddForce(Vector3.up * BallFloater, ForceMode.Acceleration);
         RigidbodyComponent.AddForce(vPower);
