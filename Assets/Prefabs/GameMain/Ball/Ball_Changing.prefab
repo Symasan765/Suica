@@ -300,10 +300,10 @@ MonoBehaviour:
       outSlope: 0.04166666
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.9046766
-      value: 0.22154914
-      inSlope: 0.85571444
-      outSlope: 0.85571444
+      time: 0.92133313
+      value: 0.08404303
+      inSlope: 0.48442492
+      outSlope: 0.48442492
       tangentMode: 0
     - serializedVersion: 2
       time: 1
@@ -315,8 +315,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   MaxForce: 20
-  CurveAngle: 0
-  BallFloater: 50
+  CurveAngle: 270
+  BallFloater: 20
 --- !u!135 &135349390655265514
 SphereCollider:
   m_ObjectHideFlags: 1

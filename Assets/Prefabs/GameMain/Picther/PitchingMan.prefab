@@ -41,6 +41,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1074690893354496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4182270887069404}
+  - component: {fileID: 114949074402309662}
+  m_Layer: 0
+  m_Name: BallSetting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1082137383886154
 GameObject:
   m_ObjectHideFlags: 1
@@ -1441,6 +1457,19 @@ Transform:
   m_Father: {fileID: 4221303268639564}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4182270887069404
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1074690893354496}
+  m_LocalRotation: {x: -0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 1.592997, z: 13.969}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4334399946817522}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4209427253709108
 Transform:
   m_ObjectHideFlags: 1
@@ -1649,6 +1678,7 @@ Transform:
   - {fileID: 4221303268639564}
   - {fileID: 4611151926570490}
   - {fileID: 4610528573062158}
+  - {fileID: 4182270887069404}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2869,10 +2899,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9485dba56ae510a488f9807b0d722150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainControllerObj: {fileID: 0}
   State: 0
   animator: {fileID: 95438127316662024}
   shooter: {fileID: 114755102989173484}
   ShotTimeOffset: 0.38
+  clip: {fileID: 0}
+  ballSetting: {fileID: 114949074402309662}
 --- !u!114 &114755102989173484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2885,7 +2918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallList:
-  - {fileID: 1068282939561686, guid: f036145989a7c0b4fa20afcc36c5e1d9, type: 2}
+  - {fileID: 1491116032291702, guid: 9aacb70984e10634b9c3aceebe2328f6, type: 2}
   RayLength: 18.44
   RayMesh: {fileID: 1419868054586324}
   GloveObject: {fileID: 1691336309462332}
@@ -2906,6 +2939,7 @@ MonoBehaviour:
   StopTimeInCatch: 1
   source: {fileID: 82185538382548662}
   clip: {fileID: 8300000, guid: f4b03c0baccea5842841a89d52517e1c, type: 3}
+  MoveWeight: 0.05
   State: 0
 --- !u!114 &114936037576968686
 MonoBehaviour:
@@ -2924,6 +2958,22 @@ MonoBehaviour:
   pitchMin: 0
   pitchMax: 0
   playOnAwake: 0
+--- !u!114 &114949074402309662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1074690893354496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390aa0b350ca9d948929f469134a4987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxNum: 30
+  currentNum: 30
+  canvas: {fileID: 0}
+  message: {fileID: 1990000860668578, guid: 92199aec08f6ae440ab263157878043e, type: 2}
+  text: {fileID: 0}
 --- !u!124 &124207601301874310
 Behaviour:
   m_ObjectHideFlags: 1
