@@ -425,7 +425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca141db85a46cd489a205848de1bc52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 0}
   m_BatMass: 0.9
 --- !u!136 &136504089365634526
 CapsuleCollider:
