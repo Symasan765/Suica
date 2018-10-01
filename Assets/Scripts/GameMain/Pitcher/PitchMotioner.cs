@@ -22,6 +22,9 @@ public class PitchMotioner : MonoBehaviour {
     public BallShooter shooter;
     public float ShotTimeOffset = 0;
 
+    [Tooltip("球種選択 : -1@random")]
+    public int BallType = -1;
+
 
     private AudioSource audioSource;
     public AudioClip clip;
@@ -83,7 +86,7 @@ public class PitchMotioner : MonoBehaviour {
                 {
                     State = EPitchState.Idle;
                     animator.SetBool("Throw", false);
-                    shooter.ShotBall(0);
+                    shooter.ShotBall(BallType);
                 }
             }
 
@@ -93,6 +96,21 @@ public class PitchMotioner : MonoBehaviour {
     private SteamVR_Controller.Device Controller
     {
         get { return SteamVR_Controller.Input((int)trackedObject.index); }
+    }
+
+    private void ChangeBallType()
+    {
+        int typeMax = shooter.GetBallTypeMax();
+        if(Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
+        {
+            BallType += 1;
+            if(BallType > typeMax)
+            {
+                BallType = -1;
+            }
+        }
+
+        BallType = Mathf.Clamp(BallType, -1, typeMax);
     }
 
 

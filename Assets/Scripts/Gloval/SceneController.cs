@@ -13,11 +13,12 @@ public class SceneController : MonoBehaviour {
     }
     [Tooltip("シーンタイプ")]
     public ESceneType CurrentScene = ESceneType.Title;
+    public SteamVR_TrackedObject VRTrackedObj;
 
     // ゲーム中永続
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        // DontDestroyOnLoad(this.gameObject);
     }
 
     // Use this for initialization
@@ -27,7 +28,7 @@ public class SceneController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Controller.GetPress(SteamVR_Controller.ButtonMask.Trigger))
         {
             LoadNewScene(ESceneType.GameMain);
         }
@@ -38,4 +39,10 @@ public class SceneController : MonoBehaviour {
         CurrentScene = sceneType;
         SceneManager.LoadScene(sceneType.ToString());
     }
+
+    private SteamVR_Controller.Device Controller
+    {
+        get { return SteamVR_Controller.Input((int)VRTrackedObj.index); }
+    }
+
 }
