@@ -60,7 +60,17 @@ public class BallShooter : MonoBehaviour {
         {
             DestroyObject(ManageBall);
         }
-        ManageBall = Instantiate(BallList[type]);
+
+        int BallShootType = type;
+        // Random
+        if(type == -1)
+        {
+            int typeMax = BallList.Length;
+            BallShootType = Random.Range(0, typeMax);
+        }
+        
+
+        ManageBall = Instantiate(BallList[BallShootType]);
         ManageBall.transform.position = this.transform.position;
         ManageBall.transform.rotation = this.transform.rotation;
         ManageBall.GetComponent<Ball_Pure>().Speed = ShotSpeed;     //球速のセット
@@ -87,5 +97,19 @@ public class BallShooter : MonoBehaviour {
     {
         if(ReleasePoint)
             this.transform.position = ReleasePoint.position;
+    }
+
+    public int GetBallTypeMax()
+    {
+        return BallList.Length;
+    }
+
+    public string GetBallName(int type)
+    {
+        if(type == -1)
+        {
+            return "Random";
+        }
+        return BallList[type].GetComponent<Ball_Pure>().BallTypeName;
     }
 }
