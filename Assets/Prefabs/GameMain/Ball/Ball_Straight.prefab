@@ -284,9 +284,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  MaxForce: 20
+  MaxForce: 0
   CurveAngle: 0
-  BallFloater: 50
+  BallFloater: 9
 --- !u!114 &114901282569878104
 MonoBehaviour:
   m_ObjectHideFlags: 1

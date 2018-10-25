@@ -285,7 +285,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   MaxForce: 500
-  CurveAngle: 270
+  CurveAngle: 180
   BallFloater: 0
 --- !u!114 &114502507217600216
 MonoBehaviour:

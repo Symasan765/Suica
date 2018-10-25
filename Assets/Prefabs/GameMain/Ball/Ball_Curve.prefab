@@ -270,8 +270,8 @@ MonoBehaviour:
       outSlope: 0.04166666
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.9046766
-      value: 0.22154914
+      time: 0.7937147
+      value: 0.23360358
       inSlope: 0.85571444
       outSlope: 0.85571444
       tangentMode: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  MaxForce: 200
+  MaxForce: 300
   CurveAngle: 130
   BallFloater: 0
 --- !u!114 &114523049889051046

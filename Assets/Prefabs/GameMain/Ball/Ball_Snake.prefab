@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   audioSource: {fileID: 82810677799365300}
-  BallTypeName: Rising
+  BallTypeName: Snake
   EffectiveTiming:
     serializedVersion: 2
     m_Curve:
@@ -290,7 +290,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  MaxForce: 200
+  MaxForce: 1000
   CurveAngle: 90
   BallFloater: 0
 --- !u!114 &114646751725739196
